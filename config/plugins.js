@@ -1,5 +1,3 @@
-const STRAPI_TOKEN = "f0fc4e88355eccfdde3959332ef43e280257af86016f9e1362c1409626d2b6c45fbe7e14ef406bc89d3d47860619b8d11018373b39696197fa9c0a5affef871039e097b819c4458e855330e4f81f55edd9eca3a9b153272ed0c621003dcaaca2b069580a29ad7dabcaa6f7cd7c6a535e843012d4ccfa2f15d6f83645a3eea7f5";
-
 module.exports = ({ env }) => ({
 	io: {
 	  enabled: true,
@@ -41,15 +39,19 @@ module.exports = ({ env }) => ({
 						...data.message
 					}
 				}
+
+				strapi.log.info(`jwt tokem ${data.token}}`);
+				strapi.log.info(`jwt tokem ${data.message.token}}`);
+				
 		  
 				const requestOptions = {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json',
-						'Authorization': `Bearer ${STRAPI_TOKEN}`,
+						'Authorization': `Bearer ${data.message.token}`,
 					 },
 					body: JSON.stringify(sendData),
 				  };
-			  
+				  
 				  fetch(`${env('BACKEND_URL')}/api/messages`, requestOptions)
 					.then((response) => response.json())
 					.then((data) => {
@@ -80,8 +82,8 @@ module.exports = ({ env }) => ({
 		socket: {
 		  serverOptions: {
 			cors: {
-			  origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
-			//   origin: [`${env("FRONTEND_URL")}`], // Replace with your client URL
+			//   origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
+			  origin: [`${env("FRONTEND_URL")}`], // Replace with your client URL
 			//   origin: ['http://127.0.0.1:5500', "http://localhost:3000/"], // Replace with your client URL
 			  methods: ['GET', 'POST'],
 			  allowedHeaders: ['Content-Type'],
