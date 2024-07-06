@@ -50,7 +50,7 @@ module.exports = ({ env }) => ({
 					body: JSON.stringify(sendData),
 				  };
 			  
-				  fetch('http:localhost:1337/api/messages', requestOptions)
+				  fetch(`${env('BACKEND_URL')}/api/messages`, requestOptions)
 					.then((response) => response.json())
 					.then((data) => {
 					  console.log('Post successful:', {"sender": "server", data});
@@ -80,8 +80,8 @@ module.exports = ({ env }) => ({
 		socket: {
 		  serverOptions: {
 			cors: {
-			  origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
-			//   origin: ['http://localhost:3000'], // Replace with your client URL
+			//   origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
+			  origin: [`${env("FRONTEND_URL")}`], // Replace with your client URL
 			//   origin: ['http://127.0.0.1:5500', "http://localhost:3000/"], // Replace with your client URL
 			  methods: ['GET', 'POST'],
 			  allowedHeaders: ['Content-Type'],
