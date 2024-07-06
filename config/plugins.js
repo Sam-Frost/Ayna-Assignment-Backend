@@ -80,8 +80,8 @@ module.exports = ({ env }) => ({
 		socket: {
 		  serverOptions: {
 			cors: {
-			//   origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
-			  origin: [`${env("FRONTEND_URL")}`], // Replace with your client URL
+			  origin: ['https://ayna.samarthnegi.xyz'], // Replace with your client URL
+			//   origin: [`${env("FRONTEND_URL")}`], // Replace with your client URL
 			//   origin: ['http://127.0.0.1:5500', "http://localhost:3000/"], // Replace with your client URL
 			  methods: ['GET', 'POST'],
 			  allowedHeaders: ['Content-Type'],
